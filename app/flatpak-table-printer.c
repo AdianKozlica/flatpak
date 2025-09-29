@@ -726,7 +726,8 @@ flatpak_table_printer_print (FlatpakTablePrinter *printer)
 }
 
 void
-flatpak_table_printer_print_json (FlatpakTablePrinter *printer) {
+flatpak_table_printer_print_json (FlatpakTablePrinter *printer)
+{
   JsonArray *json_array = json_array_new();
 
   int i;
