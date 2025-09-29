@@ -21,7 +21,8 @@
 #include "config.h"
 
 #include <glib/gi18n.h>
-
+#include <json-glib/json-glib.h>
+#include <json-glib/json-gobject.h>
 #include "flatpak-table-printer.h"
 #include "flatpak-tty-utils-private.h"
 #include "flatpak-utils-private.h"
@@ -722,6 +723,38 @@ flatpak_table_printer_print (FlatpakTablePrinter *printer)
   flatpak_get_window_size (&rows, &cols);
   flatpak_table_printer_print_full (printer, 0, cols, NULL, NULL);
   g_print ("\n");
+}
+
+void
+flatpak_table_printer_print_json (FlatpakTablePrinter *printer) {
+  JsonArray *json_array = json_array_new();
+
+  int i;
+  for (i = 0; i < printer->rows->len; i++)
+    {
+      JsonObject *json_object = json_object_new();
+      Row *row = g_ptr_array_index (printer->rows, i);
+      
+      int j;
+      for (j = 0; j < row->cells->len; j++)
+        {
+          Cell *cell = g_ptr_array_index (row->cells, j);
+          TableColumn *col = peek_table_column (printer, j);
+          const char *title = col && col->title ? col->title : "";
+          json_object_set_string_member(json_object, title, cell->text);
+        }
+      
+      json_array_add_object_element(json_array, json_object);
+    }
+
+  JsonNode *root_node = json_node_new(JSON_NODE_ARRAY);
+  json_node_set_array(root_node, json_array);
+
+  gchar *json_string = json_to_string(root_node, TRUE);
+  g_print(json_string);
+
+  g_free(json_string);
+  json_node_free(root_node);
 }
 
 int
