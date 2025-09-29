@@ -33,7 +33,6 @@ static char *opt_arch;
 static const char **opt_cols;
 static gboolean opt_json;
 
-
 static GOptionEntry options[] = {
   { "arch", 0, 0, G_OPTION_ARG_STRING, &opt_arch, N_("Arch to search for"), N_("ARCH") },
   { "columns", 0, 0, G_OPTION_ARG_STRING_ARRAY, &opt_cols, N_("What information to show"), N_("FIELD,…") },

@@ -255,7 +255,7 @@ flatpak_builtin_info (int argc, char **argv, GCancellable *cancellable, GError *
       len = MAX (len, g_utf8_strlen (_("Extension:"), -1));
 
       width = cols - (len + 1);
-   
+
       print_aligned_take (len, _("ID:"), flatpak_decomposed_dup_id (ref));
       print_aligned (len, _("Ref:"), flatpak_decomposed_get_ref (ref));
       print_aligned_take (len, _("Arch:"), flatpak_decomposed_dup_arch (ref));

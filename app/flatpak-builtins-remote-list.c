@@ -39,7 +39,6 @@ static gboolean opt_show_disabled;
 static const char **opt_cols;
 static gboolean opt_json;
 
-
 static GOptionEntry options[] = {
   { "show-details", 'd', 0, G_OPTION_ARG_NONE, &opt_show_details, N_("Show remote details"), NULL },
   { "show-disabled", 0, 0, G_OPTION_ARG_NONE, &opt_show_disabled, N_("Show disabled remotes"), NULL },
