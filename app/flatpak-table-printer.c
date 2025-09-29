@@ -752,7 +752,7 @@ flatpak_table_printer_print_json (FlatpakTablePrinter *printer)
   json_node_set_array(root_node, json_array);
 
   gchar *json_string = json_to_string(root_node, TRUE);
-  g_print(json_string);
+  g_print("%s", json_string);
 
   g_free(json_string);
   json_node_free(root_node);
