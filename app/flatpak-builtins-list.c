@@ -357,12 +357,7 @@ print_table_for_refs (gboolean      print_apps,
 
   if (flatpak_table_printer_get_current_row (printer) > 0)
     {
-      if (opt_json) {
-        flatpak_table_printer_print_json(printer);
-      }
-      else {
-        flatpak_table_printer_print (printer);
-      } 
+      opt_json ? flatpak_table_printer_print_json (printer) : flatpak_table_printer_print (printer);
     }
 
   return TRUE;
